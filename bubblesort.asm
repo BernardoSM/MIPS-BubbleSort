@@ -31,7 +31,7 @@
 	#FIM DO PRINTF DO VETOR
 	
 	lw $t1, 0($s1)
-	add $a0, $0, $s0	#a0 recebe o endereÁo de memÛria do vetor $s0
+	add $a0, $0, $s0	#a0 recebe o endere√ßo de mem√≥ria do vetor $s0
 	add $a1, $0, $t1
 	
 	jal organizavetor
@@ -40,26 +40,26 @@
 	la $a0, vfin
 	li $v0, 4
 	syscall
-	lw $a0, 0($s0) 	#o syscall sempre vai exibir o valor que est· em $a0
+	lw $a0, 0($s0) 	
 	li $v0, 1
 	syscall
 	la $a0, barra
 	li $v0, 4
 	syscall
-	lw $a0, 4($s0) 	#o syscall sempre vai exibir o valor que est· em $a0
+	lw $a0, 4($s0) 	
 	li $v0, 1
 	syscall
 	la $a0, barra
 	li $v0, 4
 	syscall
-	lw $a0, 8($s0) 	#o syscall sempre vai exibir o valor que est· em $a0
+	lw $a0, 8($s0) 	
 	li $v0, 1
 	syscall
 	#FIM PRINTF DO VETOR
 	
 	li $v0, 10 		#fechar o programa
 	syscall
-#FunÁ„o de organizar o vetor
+#Fun√ß√£o de organizar o vetor
 organizavetor:
 	addi $sp, $sp, -4
 	sw $t0, 0($sp)
@@ -78,41 +78,41 @@ organizavetor:
 	addi $t2, $0, 1		#$t2 = CONTADOR de comparar os valores do vetor
 	addi $t3, $0, 1		#$t3 = CONTADOR da quantidade de vezes que teremos que passar no vetor
 
-#FunÁ„o de iniciar o loop do bubble sort
+#Fun√ß√£o de iniciar o loop do bubble sort
 ini_loop:	
 	beq $t2, $a1, fim_loop	#se $t2 = $a1, vai pro fim
 		j trocapos
 
-#FunÁ„o de comparar uma posiÁ„o com sua sucessora
+#Fun√ß√£o de comparar uma posi√ß√£o com sua sucessora
 trocapos:	
 	lw $t0, 0($a0) 		#$t0 = v[0]
 	lw $t1, 4($a0) 		#$t1 = v[0]
 	blt $t1, $t0, trocavalor
-	addi $a0, $a0, 4	#$a0 += 4 // Endere?o = endereÁo + 4 (avanÁa uma posiÁ„o do vetor)
+	addi $a0, $a0, 4	#$a0 += 4 // Endere√ßo = endere√ßo + 4 (avan√ßa uma posi√ß√£o do vetor)
 	addi $t2, $t2, 1	#$t2++
 		j ini_loop
 
-#FunÁ„o de trocar o valor caso a posiÁ„o de vetor sucessora seja maior que a antecessora
+#Fun√ß√£o de trocar o valor caso a posi√ß√£o de vetor sucessora seja maior que a antecessora
 trocavalor:
 	sw $t0, 4($a0)		#v[0] = v[1]
 	sw $t1, 0($a0)		#v[1] = v[0]
-	addi $a0, $a0, 4	#$a0 += 4 // Endere?o = endereÁo + 4 (avanÁa uma posiÁ„o do vetor)
+	addi $a0, $a0, 4	#$a0 += 4 // Endere√ßo = endere√ßo + 4 (avan√ßa uma posi√ß√£o do vetor)
 	addi $t2, $t2, 1	#$t2++
 		j ini_loop
 
-#FunÁ„o de resetar os valores para fazer todas as passagens pro vetor, pois no bubble sort deve comparar os valores do vetor a quantidade de vezes do tamanho do vetor	
+#Fun√ß√£o de resetar os valores para fazer todas as passagens pro vetor, pois no bubble sort deve comparar os valores do vetor a quantidade de vezes do tamanho do vetor	
 resetacontador:
 	addi $t2, $0, 1		#resetando o contador $t2
-	add $a0, $0, $s0	#resetando o endereÁo de memÛria
+	add $a0, $0, $s0	#resetando o endere√ßo de mem√≥ria
 	add $t3, $t3, 1		#$t3++	
 		j ini_loop
 
-#FunÁ„o de comparar se o vetor foi conferido na quantidade de vezes do seu tamanho
+#Fun√ß√£o de comparar se o vetor foi conferido na quantidade de vezes do seu tamanho
 fim_loop:
 	beq $t3, $a1, end	#se $t3 = $a1, vai pro fim
 		j resetacontador	
 	
-#Aqui È realmente quando acaba o bubblesort
+#Aqui √© realmente quando acaba o bubblesort
 end:	
 	#DESALOCANDO / o ultimo que eu aloquei deve ser o primeiro a ser desalocado
 	sw $t2, 0($sp)
